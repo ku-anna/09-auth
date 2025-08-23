@@ -1,0 +1,19 @@
+import Link from "next/link";
+import css from "@/app/notes/filter/@sidebar/Sidebar.module.css";
+
+const NotesSidebar = async () => {
+  const localTags = ["All", "Work", "Todo", "Personal", "Meeting", "Shopping"];
+
+  return (
+    <ul className={css.menuList}>
+      {localTags.map((category) => (
+        <li key={category} className={css.menuItem}>
+          <Link href={`/notes/filter/${category}`} className={css.menuLink}>
+            {category}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+};
+export default NotesSidebar;
