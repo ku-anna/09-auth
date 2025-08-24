@@ -2,7 +2,7 @@
 
 import { useId, useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNote } from "@/lib/api";
+import { createNote } from "@/lib/api/api";
 import { NewNoteData } from "@/lib/store/noteStore";
 
 import toast from "react-hot-toast";

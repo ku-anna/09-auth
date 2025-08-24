@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import css from "./TagsMenu.module.css";
 import Link from "next/link";
-import { tags } from "../../lib/api";
+import { tags } from "../../lib/api/api";
 
 const TagsMenu = () => {
   const [open, setOpen] = useState(false);

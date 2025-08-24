@@ -11,7 +11,7 @@ import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 import { ErrorMessageEmpty } from "@/components/ErrorMessageEmpty/ErrorMessageEmpty";
 import NoteList from "@/components/NoteList/NoteList";
 
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/api/serverApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import css from "./NotesPage.module.css";
