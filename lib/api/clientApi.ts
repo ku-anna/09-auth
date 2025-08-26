@@ -6,7 +6,7 @@ interface NotesHttpResponse {
   notes: Note[];
   totalPages: number;
 }
-export interface RegisterRequest {
+export interface SignupRequest {
   email: string;
   password: string;
 }
@@ -15,7 +15,7 @@ export type LoginRequest = {
   password: string;
 };
 
-export const register = async (data: RegisterRequest): Promise<User> => {
+export const userRegister = async (data: SignupRequest): Promise<User> => {
   const res = await nextServer.post<User>("/auth/register", data);
   return res.data;
 };
