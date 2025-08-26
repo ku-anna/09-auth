@@ -6,7 +6,6 @@ import { getMe, updateMe } from "@/lib/api/clientApi";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import { useRouter } from "next/navigation";
 
 export default function EditProfilePage() {
@@ -26,7 +25,7 @@ export default function EditProfilePage() {
         const user = await getMe();
         if (!active) return;
 
-        setUsername(user.username);
+        setUsername(user.username ?? "");
         setEmail(user.email);
         if (user.avatar) {
           setAvatarSrc(user.avatar);
@@ -49,7 +48,7 @@ export default function EditProfilePage() {
     setIsSaving(true);
 
     try {
-      await updateMe({ username, email });
+      await updateMe({ username, email }); // 👈 тут можна залишити email, якщо бекенд цього вимагає
       router.push("/profile");
     } catch (err) {
       console.error("Failed to save changes", err);
@@ -90,9 +89,7 @@ export default function EditProfilePage() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-
-          <p>Email: {email}</p>
-
+          <p>Email: {email}</p> {/* 👈 email просто як текст */}
           <div className={css.actions}>
             <button
               type="submit"
