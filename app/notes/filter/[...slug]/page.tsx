@@ -10,9 +10,16 @@ interface NotesPageProps {
 export default async function NotesPage({ params }: NotesPageProps) {
   const { slug } = await params;
   const tagNote = slug[0] === "All" ? "" : slug[0] || "";
-  const initialData = await fetchNotes("", 1, tagNote);
+  const initialData = await fetchNotes("", "", 1, tagNote);
+  const cookieHeader = "";
 
-  return <NotesClient initialData={initialData} initialTag={tagNote} />;
+  return (
+    <NotesClient
+      initialData={initialData}
+      initialTag={tagNote}
+      cookieHeader={cookieHeader}
+    />
+  );
 }
 
 // META

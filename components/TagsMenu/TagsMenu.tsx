@@ -5,7 +5,20 @@ import { usePathname } from "next/navigation";
 
 import css from "./TagsMenu.module.css";
 import Link from "next/link";
-import { tags } from "../../lib/api/api";
+
+const tags = [
+  "All",
+  "Work",
+  "Personal",
+  "Meeting",
+  "Shopping",
+  "Ideas",
+  "Travel",
+  "Finance",
+  "Health",
+  "Important",
+  "Todo",
+];
 
 const TagsMenu = () => {
   const [open, setOpen] = useState(false);

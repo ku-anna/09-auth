@@ -23,11 +23,13 @@ interface NotesClientProps {
     totalPages: number;
   };
   initialTag: string;
+  cookieHeader: string;
 }
 
 export default function NotesClient({
   initialData,
   initialTag,
+  cookieHeader,
 }: NotesClientProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
@@ -41,7 +43,7 @@ export default function NotesClient({
 
   const { data, isError, isLoading, isSuccess } = useQuery({
     queryKey: ["notes", debouncedQuery, currentPage, tag],
-    queryFn: () => fetchNotes(debouncedQuery, currentPage, tag),
+    queryFn: () => fetchNotes(cookieHeader, debouncedQuery, currentPage, tag),
     placeholderData: keepPreviousData,
     initialData,
   });
