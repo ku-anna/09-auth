@@ -11,7 +11,7 @@ import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 import { ErrorMessageEmpty } from "@/components/ErrorMessageEmpty/ErrorMessageEmpty";
 import NoteList from "@/components/NoteList/NoteList";
 
-import { fetchNotes } from "@/lib/api/serverApi";
+import { fetchNotes } from "@/lib/api/clientApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import css from "./NotesPage.module.css";
@@ -29,7 +29,6 @@ interface NotesClientProps {
 export default function NotesClient({
   initialData,
   initialTag,
-  cookieHeader,
 }: NotesClientProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
@@ -43,7 +42,7 @@ export default function NotesClient({
 
   const { data, isError, isLoading, isSuccess } = useQuery({
     queryKey: ["notes", debouncedQuery, currentPage, tag],
-    queryFn: () => fetchNotes(cookieHeader, debouncedQuery, currentPage, tag),
+    queryFn: () => fetchNotes(debouncedQuery, currentPage, tag),
     placeholderData: keepPreviousData,
     initialData,
   });

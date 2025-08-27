@@ -1,22 +1,30 @@
 import { nextServer } from "./api";
 import { Note } from "@/types/note";
 import { User } from "@/types/user";
+import { cookies } from "next/headers";
 
 interface NotesHttpResponse {
   notes: Note[];
   totalPages: number;
 }
 
-export const checkServerSession = async (cookieHeader: string) => {
+export const checkServerSession = async () => {
+  // Дістаємо поточні cookie
+  const cookieStore = await cookies();
   const res = await nextServer.get("/auth/session", {
-    headers: { Cookie: cookieHeader },
+    headers: {
+      // передаємо кукі далі
+      Cookie: cookieStore.toString(),
+    },
   });
-  return res.data;
+  // Повертаємо повний респонс, щоб middleware мав доступ до нових cookie
+  return res;
 };
 
-export const getServerMe = async (cookieHeader: string): Promise<User> => {
+export const getServerMe = async (): Promise<User> => {
+  const cookieStore = await cookies();
   const { data } = await nextServer.get<User>("/users/me", {
-    headers: { Cookie: cookieHeader },
+    headers: { Cookie: cookieStore.toString() },
   });
   return data;
 };

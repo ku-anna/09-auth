@@ -1,6 +1,7 @@
 import { fetchNotes } from "@/lib/api/serverApi";
 import NotesClient from "./Notes.client";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 
 interface NotesPageProps {
   params: Promise<{ slug: string[] }>;
@@ -10,8 +11,10 @@ interface NotesPageProps {
 export default async function NotesPage({ params }: NotesPageProps) {
   const { slug } = await params;
   const tagNote = slug[0] === "All" ? "" : slug[0] || "";
-  const initialData = await fetchNotes("", "", 1, tagNote);
-  const cookieHeader = "";
+
+  const cookieHeader = cookies().toString();
+
+  const initialData = await fetchNotes(cookieHeader, "", 1, tagNote);
 
   return (
     <NotesClient
@@ -32,10 +35,14 @@ export async function generateMetadata({
 
   return {
     title: `${tagLabel} – Notes Dashboard`,
-    description: `Browse your notes${tag === "All" ? "" : ` filtered by "${tag}"`}.`,
+    description: `Browse your notes${
+      tag === "All" ? "" : ` filtered by "${tag}"`
+    }.`,
     openGraph: {
       title: `${tagLabel} – Notes Dashboard`,
-      description: `Browse your notes${tag === "All" ? "" : ` filtered by "${tag}"`}.`,
+      description: `Browse your notes${
+        tag === "All" ? "" : ` filtered by "${tag}"`
+      }.`,
       url: `https://notehub.com/notes/${tag}`,
       images: [
         {
