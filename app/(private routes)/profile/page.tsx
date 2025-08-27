@@ -38,7 +38,11 @@ export default async function Profile() {
         </div>
         <div className={css.avatarWrapper}>
           <Image
-            src={user.avatar ?? "/default-avatar.png"}
+            src={
+              user.avatar && user.avatar.trim() !== ""
+                ? user.avatar
+                : "/default-avatar.png"
+            }
             alt="User Avatar"
             width={120}
             height={120}
