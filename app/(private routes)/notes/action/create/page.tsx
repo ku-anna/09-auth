@@ -1,20 +1,20 @@
-import NoteFormClient from "@/components/NoteForm/NoteForm";
-import css from "./page.module.css";
-import { Metadata } from "next";
+import { NoteForm } from "@/components/NoteForm/NoteForm";
+import css from "./CreateNote.module.css";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Create a new note",
-  description: "Post a new note to not forget anything.",
+  title: "Create Note",
+  description: "Create a new note.",
   openGraph: {
-    title: "Create a new note",
-    description: "Post a new note to not forget anything.",
-    url: "https://notehub.com/notes/action/create",
+    title: "Create Note",
+    description: "Create a new note.",
+    url: "https://09-auth-nu-three.vercel.app/notes/action/create",
     images: [
       {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
         width: 1200,
         height: 630,
-        alt: "Create Note",
+        alt: "Create a new note",
       },
     ],
   },
@@ -25,7 +25,7 @@ const CreateNote = () => {
     <main className={css.main}>
       <div className={css.container}>
         <h1 className={css.title}>Create note</h1>
-        <NoteFormClient />
+        <NoteForm />
       </div>
     </main>
   );

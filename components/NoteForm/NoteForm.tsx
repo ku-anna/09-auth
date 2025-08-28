@@ -11,9 +11,9 @@ import { useNoteDraftStore } from "@/lib/store/noteStore";
 import { NoteTag } from "@/types/note";
 import css from "./NoteForm.module.css";
 
-interface NoteFormProps {
-  onClose: () => void;
-}
+export type NoteFormProps = {
+  onClose?: () => void;
+};
 
 const NoteFormClient = () => {
   const router = useRouter();
@@ -40,7 +40,7 @@ export function NoteForm({ onClose }: NoteFormProps) {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
       clearDraft();
-      onClose();
+      onClose?.();
       toast.success(`Note "${data.title}" created.`);
     },
     onError: () => {
