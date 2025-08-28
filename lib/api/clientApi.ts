@@ -18,7 +18,7 @@ export type LoginRequest = {
 };
 
 export const userRegister = async (data: SignupRequest): Promise<User> => {
-  const res = await nextServer.post<User>("/auth/sign-up", data);
+  const res = await nextServer.post<User>("/auth/register", data);
   return res.data;
 };
 
