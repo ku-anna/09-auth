@@ -1,7 +1,7 @@
 import css from "./Header.module.css";
 import Link from "next/link";
 import TagsMenu from "../TagsMenu/TagsMenu";
-import AuthNavigation from "../AuthNaviagtion/AuthNavigation";
+import AuthNavigation from "../AuthNavigation/AuthNavigation";
 
 const Header = () => {
   return (
