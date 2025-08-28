@@ -6,30 +6,39 @@ interface NotesHttpResponse {
   notes: Note[];
   totalPages: number;
 }
+
 export interface SignupRequest {
   email: string;
   password: string;
 }
+
 export type LoginRequest = {
   email: string;
   password: string;
 };
 
 export const userRegister = async (data: SignupRequest): Promise<User> => {
-  const res = await nextServer.post<User>("/auth/register", data);
+  const res = await nextServer.post<User>("/auth/sign-up", data);
   return res.data;
 };
-export const getMe = async () => {
+
+export const login = async (data: LoginRequest): Promise<User> => {
+  const res = await nextServer.post<User>("/auth/login", data);
+  return res.data;
+};
+
+export const getMe = async (): Promise<User> => {
   const { data } = await nextServer.get<User>("/users/me");
   return data;
 };
+
 export const updateMe = async ({
   username,
   email,
 }: {
   username: string;
   email: string;
-}) => {
+}): Promise<User> => {
   const res = await nextServer.patch<User>("/users/me", { username, email });
   return res.data;
 };
@@ -37,17 +46,11 @@ export const updateMe = async ({
 export const logout = async (): Promise<void> => {
   await nextServer.post("/auth/logout");
 };
-export const login = async (data: LoginRequest) => {
-  const res = await nextServer.post<User>("/auth/login", data);
-  return res.data;
-};
 
-type CheckSessionRequest = {
-  success: boolean;
-};
+type CheckSessionResponse = { success: boolean };
 
-export const checkSession = async () => {
-  const res = await nextServer.get<CheckSessionRequest>("/auth/session");
+export const checkSession = async (): Promise<boolean> => {
+  const res = await nextServer.get<CheckSessionResponse>("/auth/session");
   return res.data.success;
 };
 
