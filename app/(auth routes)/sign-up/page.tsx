@@ -8,9 +8,12 @@ import { User } from "@/types/user";
 
 import { useRouter } from "next/navigation";
 import { ApiError } from "../sign-in/page";
+import { useAuthStore } from "@/lib/store/authStore";
 
 export default function SignUpPage() {
   const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
+
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +31,8 @@ export default function SignUpPage() {
       setLoading(true);
       const user: User = await userRegister(data);
       console.log("Registered:", user);
-
+      setUser(user);
+      setUser(user);
       router.push("/profile");
     } catch (err) {
       const apiError = err as ApiError;
