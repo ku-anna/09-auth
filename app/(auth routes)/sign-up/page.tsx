@@ -32,7 +32,6 @@ export default function SignUpPage() {
       const user: User = await userRegister(data);
       console.log("Registered:", user);
       setUser(user);
-      setUser(user);
       router.push("/profile");
     } catch (err) {
       const apiError = err as ApiError;
