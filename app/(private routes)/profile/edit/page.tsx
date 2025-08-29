@@ -3,10 +3,12 @@
 import css from "./EditProfilePage.module.css";
 
 import { getMe, updateMe } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { User } from "@/types/user";
 
 export default function EditProfilePage() {
   const [username, setUsername] = useState("");
@@ -16,6 +18,7 @@ export default function EditProfilePage() {
   const [isSaving, setIsSaving] = useState(false);
 
   const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     let active = true;
@@ -48,7 +51,8 @@ export default function EditProfilePage() {
     setIsSaving(true);
 
     try {
-      await updateMe({ username, email }); // 👈 тут можна залишити email, якщо бекенд цього вимагає
+      const updatedUser: User = await updateMe({ username, email });
+      setUser(updatedUser);
       router.push("/profile");
     } catch (err) {
       console.error("Failed to save changes", err);
@@ -89,7 +93,7 @@ export default function EditProfilePage() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <p>Email: {email}</p> {/* 👈 email просто як текст */}
+          <p>Email: {email}</p>
           <div className={css.actions}>
             <button
               type="submit"

@@ -4,10 +4,10 @@ import { FormEvent, useState } from "react";
 import css from "./SignUp.module.css";
 import { SignupRequest, userRegister } from "@/lib/api/clientApi";
 
-import type { ApiError } from "@/app/api/api";
 import { User } from "@/types/user";
-import { AxiosError } from "axios";
+
 import { useRouter } from "next/navigation";
+import { ApiError } from "../sign-in/page";
 
 export default function SignUpPage() {
   const router = useRouter();
